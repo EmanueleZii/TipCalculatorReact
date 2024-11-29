@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 
 export default function App() {
@@ -8,35 +9,56 @@ export default function App() {
   );
 }
 
-function TipCalculator(){
+function TipCalculator()
+{
+
+  const [bill, setBill] = useState("");
+  const [percentage1, SelectPercentage1] = useState(0);
+  const [percentage2, SelectPercentage2] = useState(0);
+
+  const tip = bill * (( percentage1 + percentage2 ) /2 /100);
+
+  function handleReset(){
+    setBill('');
+    SelectPercentage1(0);
+    SelectPercentage2(0);
+   
+  }
+
   return(
     <div className='TipCalculator'>
-        <BillInput />
-        <SelectPercentage>
+        <BillInput bill={bill} setBill={setBill} />
+        <SelectPercentage percentage={percentage1} onSelect={SelectPercentage1}>
           How did you like the service?
         </SelectPercentage >
-        <SelectPercentage>
+        <SelectPercentage percentage={percentage2} onSelect={SelectPercentage2}>
           How did you your friend like the service?
         </SelectPercentage >
-        <Output />
-        <Reset />
-    </div>
+        { 
+          bill > 0 && 
+        <>
+          <Output bill={bill} setBill={setBill} tip={tip} />
+          <Reset OnReset={handleReset} />
+        </>
+        }
+   </div>
   );
 }
 
-function BillInput(){
+function BillInput({bill, setBill}){
   return(
     <div>
       <label>How Much was the bill?</label>
-      <input type='text' placeholder='Bill Value' />
+      <input type='number' placeholder='Bill Value' value={bill} onChange={(e)=>setBill(Number(e.target.value))} />
     </div>
   );
 }
 
-function SelectPercentage(){
+function SelectPercentage({children, percentage, onSelect}){
  return(
   <div>
-    <select>
+    <label>{children}</label>
+    <select value={percentage} onChange={(e)=>onSelect(Number(e.target.value))}>
     <option value='0'>Dissatisfied (0%)</option>
     <option value='5'>It Was Okey (5%)</option>
     <option value='10'>It Was Good (10%)</option>
@@ -46,10 +68,17 @@ function SelectPercentage(){
  );
 }
 
-function Output(){
+function Output({bill, setBill, tip}){
+ 
+  const result = bill + tip;
 
+  return(
+    <h3>You Pay {result}$ (${bill} + ${tip} Tip)</h3>
+  );
 }
 
-function Reset(){
-
+function Reset({OnReset}){
+  return(
+    <button onClick={OnReset}>Reset</button>
+  );
 }

@@ -19,7 +19,7 @@ div {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   text-align: center;
 }
@@ -31,15 +31,26 @@ div {
   color: #555;
 }
 
-.TipCalculator input,
-.TipCalculator select {
-  width: 100%;
+.TipCalculator input{
+  width: 90%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 0px 0px;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   transition: border-color 0.3s;
+  margin-bottom: 10px;
+}
+
+.TipCalculator select {
+  width: 100%;
+  padding: 10px;
+  margin: 0px 0px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  margin-bottom: 10px;
 }
 
 .TipCalculator input:focus,
@@ -59,6 +70,7 @@ div {
   color: #fff;
   border: none;
   padding: 10px 15px;
+  width: 100%;
   font-size: 1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -66,5 +78,5 @@ div {
 }
 
 .TipCalculator button:hover {
-  background: #0056b3;
+  background: #333;
 }
